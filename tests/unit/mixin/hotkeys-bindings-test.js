@@ -1,89 +1,87 @@
 //(c) 2014 Indexia, Inc.
-import Em from 'ember';
-import { test, moduleFor } from 'ember-qunit';
+import Ember from 'ember';
+import { module, test } from 'qunit';
 
-var set = Ember.set, get = Ember.get;
-var View, view, willDestroyCalled, childView;
+var View, view;
 var trigger = function(type, keyCode, someKey) {
-    var e = jQuery.Event(type);
-    e.which = keyCode;
+  var e = Ember.$.Event(type);
+  e.which = keyCode;
 
-    if (someKey) {
-        e[someKey + "Key"] = true;
-    }
+  if (someKey) {
+    e[someKey + "Key"] = true;
+  }
 
-    return e;
+  return e;
 };
 
 module('Testing Hotkeys Bindings Mixin', {
-    setup: function() {
-        Em.run(function() {
-            //without initializing app events won't be fired when triggering events on views such as
-            //keypress
-            App = Em.Application.create();
-            App.injectTestHelpers();
-        });
-        View = Em.View.extend(Em.Eu.HotkeysBindingsMixin, {
-        });
-    },
+  beforeEach() {
+    Ember.run(function() {
+      //without initializing app events won't be fired when triggering events on views such as
+      //keypress
+      let App = Ember.Application.create();
+      App.injectTestHelpers();
+    });
+    View = Ember.Component.extend(Ember.Eu.HotkeysBindingsMixin, {});
+  },
 
-    teardown: function() {
-        Em.run(function() {
-            //if (!view.isDestroyed) { view.destroy(); }
-        });
-    }
+  afterEach() {
+    Ember.run(function() {
+      //if (!view.isDestroyed) { view.destroy(); }
+    });
+  }
 });
 
-test('basic', function() {
-    viewDef = View.extend({
-        hotkeysBindings: ['ctrl-a'],
+test('basic', function(assert) {
+  let viewDef = View.extend({
+    hotkeysBindings: ['ctrl-a'],
 
-        actions: {
-            'ctrl+a': function() {
-                this.set('last', 'ctrl+a');
-            },
+    actions: {
+      'ctrl+a': function() {
+        this.set('last', 'ctrl+a');
+      },
 
-            'shift+r': function() {
-                this.set('last', 'shift+r');
-            },
+      'shift+r': function() {
+        this.set('last', 'shift+r');
+      },
 
-            'alt+f10': function() {
-                this.set('last', 'alt+f10');
-            },
+      'alt+f10': function() {
+        this.set('last', 'alt+f10');
+      },
 
-            'alt+b': function() {
-                this.set('last', 'alt+b');
-            },
+      'alt+b': function() {
+        this.set('last', 'alt+b');
+      },
 
-            'meta+f12': function() {
-                this.set('last', 'meta+f12');
-            }
-        }
-    });
+      'meta+f12': function() {
+        this.set('last', 'meta+f12');
+      }
+    }
+  });
 
-    view = viewDef.create();
+  view = viewDef.create();
 
-    Em.run(function() {
-        view.append();
-    });
-    
-    var e = trigger("keypress", 65, "ctrl");
-    view.$().trigger(e);
-    equal(view.get('last'), "ctrl+a");
+  Ember.run(function() {
+    view.append();
+  });
 
-    var e = trigger("keypress", 82, "shift");
-    view.$().trigger(e);
-    equal(view.get('last'), "shift+r");
+  let e = trigger("keypress", 65, "ctrl");
+  view.$().trigger(e);
+  assert.equal(view.get('last'), "ctrl+a");
 
-    var e = trigger("keypress", 121, "alt");
-    view.$().trigger(e);
-    equal(view.get('last'), 'alt+f10');
+  e = trigger("keypress", 82, "shift");
+  view.$().trigger(e);
+  assert.equal(view.get('last'), "shift+r");
 
-    var e = trigger("keydown", 66, "alt");
-    view.$().trigger(e);
-    equal(view.get('last'), 'alt+b');
+  e = trigger("keypress", 121, "alt");
+  view.$().trigger(e);
+  assert.equal(view.get('last'), 'alt+f10');
 
-    var e = trigger("keyup", 123, "meta");
-    view.$().trigger(e);
-    equal(view.get('last'), "meta+f12");
+  e = trigger("keydown", 66, "alt");
+  view.$().trigger(e);
+  assert.equal(view.get('last'), 'alt+b');
+
+  e = trigger("keyup", 123, "meta");
+  view.$().trigger(e);
+  assert.equal(view.get('last'), "meta+f12");
 });

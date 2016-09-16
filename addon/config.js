@@ -5,12 +5,14 @@ Maintain a list of configuration within an Ember Namespace,
 */
 export default Em.Namespace.extend({
   _configs: Em.Object.create(),
-  getConfig: function(name) {
+
+  getConfig(name) {
     var config;
     config = this._configs.get(name);
     return config;
   },
-  addConfig: function(name, config) {
+
+  addConfig(name, config) {
     var defaultConfig, newConfig;
     defaultConfig = this._configs.get('default');
     newConfig = Em.Object.create(config);

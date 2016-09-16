@@ -1,16 +1,17 @@
 //#(c) 2014 Indexia, Inc.
+import Ember from "ember";
+import { module, test } from 'qunit';
 
-var set = Ember.set, get = Ember.get;
-var View, view, willDestroyCalled, childView;
+var View, view;
 
 module('Testing Style Bindings Mixin', {
     setup: function() {
-        View = Em.View.extend(Em.Eu.StyleBindingsMixin, {
+        View = Ember.View.extend(Ember.Eu.StyleBindingsMixin, {
         });
     },
 
     teardown: function() {
-        Em.run(function() {
+        Ember.run(function() {
             if (!view.isDestroyed) { view.destroy(); }
         });
     }
@@ -18,7 +19,7 @@ module('Testing Style Bindings Mixin', {
 
 
 
-test('basic', function() {
+test('basic', function(assert) {
     view = View.create({
         styleBindings: ['color', 'width', 'height'],
         color: 'blue',
@@ -26,9 +27,9 @@ test('basic', function() {
         height: '100',
     });
 
-    Em.run(function() {
+    Ember.run(function() {
         view.append();
     });
 
-    equal(view.$().attr('style'), 'color:blue;width:400px;height:100;', 'Style property should be rendered properly.');
+    assert.equal(view.$().attr('style'), 'color:blue;width:400px;height:100;', 'Style property should be rendered properly.');
 });

@@ -11,6 +11,6 @@ export default Em.Mixin.create({
     }
   }),
   config: Em.computed('configName', function() {
-    return Em.IdxConfig.getConfig(this.get('configName'));
+    return Em.Config.getConfig(this.get('configName'));
   })
 });

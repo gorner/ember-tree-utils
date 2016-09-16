@@ -1,55 +1,59 @@
 //#(c) 2014 Indexia, Inc.
+import Ember from "ember";
+import { module, test } from 'qunit';
+
+var View, view;
 
 module('Testing WithConfigMixin', {
-    setup: function() {
-        Em.Config = Em.Eu.Config.create();
-        Em.Config.addConfig('default', {
+    beforeEach() {
+        Ember.Config = Ember.Eu.Config.create();
+        Ember.Config.addConfig('default', {
             baseClass: 'foo',
             tabs: {
                 inherited: "true"
             }
         });
 
-        View = Em.View.extend(Em.Eu.WithConfigMixin, {
+        View = Ember.View.extend(Ember.Eu.WithConfigMixin, {
         });
     },
 
-    teardown: function() {
-        Em.run(function() {
+    afterEach() {
+        Ember.run(function() {
             if (view && !view.isDestroyed) { view.destroy(); }
         });
     }
 });
 
-test('default config', function() {
-    ok(Em.Config.getConfig('default'));
-    equal(Em.Config.getConfig('default.baseClass'), 'foo');
+test('default config', function(assert) {
+    assert.ok(Ember.Config.getConfig('default'));
+    assert.equal(Ember.Config.getConfig('default.baseClass'), 'foo');
     view = View.create({
         classNameBindings: ['config.baseClass'],
     });
 
-    equal(view.get('configName'), 'default');
-    strictEqual(view.get('config'), Em.Config.getConfig('default'));
+    assert.equal(view.get('configName'), 'default');
+    assert.strictEqual(view.get('config'), Ember.Config.getConfig('default'));
 
-    Em.run(function() {
+    Ember.run(function() {
         view.append();
     });
 
-    ok(view.$().hasClass('foo'));
+    assert.ok(view.$().hasClass('foo'));
 });
 
 
-test('New Config', function() {
-    Em.Config.addConfig('new', {
+test('New Config', function(assert) {
+    Ember.Config.addConfig('new', {
         advancedClass: 'bar',
         tabs: {
             extended: "now"
         }
     });
 
-    equal(Em.Config.getConfig('default.tabs.inherited'), 'true', 'Ensure deep default properties.');
-    equal(Em.Config.getConfig('new.tabs.inherited'), 'true', 'Should deeply inherit from default.');
-    equal(Em.Config.getConfig('new.tabs.extended'), 'now', 'Should extend default.');
-    ok(!Em.Config.getConfig('default.tabs.extended'), 'Should not extend default config')
-    equal(Em.Config.getConfig('new.baseClass'), 'foo', 'Should inherit from default.');
+    assert.equal(Ember.Config.getConfig('default.tabs.inherited'), 'true', 'Ensure deep default properties.');
+    assert.equal(Ember.Config.getConfig('new.tabs.inherited'), 'true', 'Should deeply inherit from default.');
+    assert.equal(Ember.Config.getConfig('new.tabs.extended'), 'now', 'Should extend default.');
+    assert.ok(!Ember.Config.getConfig('default.tabs.extended'), 'Should not extend default config');
+    assert.equal(Ember.Config.getConfig('new.baseClass'), 'foo', 'Should inherit from default.');
 });
