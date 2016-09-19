@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-idx-utils'
+  name: 'ember-tree-utils'
 };

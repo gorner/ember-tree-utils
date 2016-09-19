@@ -1,1 +1,1 @@
-export { default } from 'ember-idx-utils/utils/delay';
+export { default } from 'ember-tree-utils/utils/delay';

@@ -1,1 +1,1 @@
-export { default } from 'ember-idx-utils/mixins/hotkeys-binding';
+export { default } from 'ember-tree-utils/mixins/hotkeys-binding';

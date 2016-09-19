@@ -1,1 +1,1 @@
-export { default } from 'ember-idx-utils/mixins/style-binding';
+export { default } from 'ember-tree-utils/mixins/style-binding';

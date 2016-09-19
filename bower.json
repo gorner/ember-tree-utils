@@ -1,12 +1,13 @@
 {
-  "name": "ember-idx-utils",
-  "version": "0.2.3",
+  "name": "ember-tree-utils",
+  "version": "0.2.4",
   "description": "A set of utilities for Ember.js",
-  "homepage": "http://www.github.com/indexiatech/ember-idx-utils",
+  "homepage": "http://www.github.com/systembugtj/ember-tree-utils",
   "authors": [
-    "Indexia Technologies, ltd."
+    "Indexia Technologies, ltd.",
+    "albert_lee@hotmail.com"
   ],
-  "license": "ASF 2.0",
+  "license": "MIT",
   "dependencies": {
     "ember": "~2.7.0",
     "ember-cli-shims": "0.1.1",

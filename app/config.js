@@ -1,2 +1,2 @@
-import Config from 'ember-idx-utils/config'
+import Config from 'ember-tree-utils/config'
 export default Config;

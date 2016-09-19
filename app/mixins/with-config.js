@@ -1,1 +1,1 @@
-export { default } from 'ember-idx-utils/mixins/with-config';
+export { default } from 'ember-tree-utils/mixins/with-config';
