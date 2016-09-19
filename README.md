@@ -1,4 +1,4 @@
-# Ember-global-config
+# ember-tree-utils
 forked from indexiatech/ember-idx-utils
 
 An Ember addon provides an application wise configuration utils.
