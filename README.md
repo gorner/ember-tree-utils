@@ -1,6 +1,7 @@
-# Ember-idx-utils
+# Ember-global-config
+forked from indexiatech/ember-idx-utils
 
-This README outlines the details of collaborating on this Ember addon.
+An Ember addon provides an application wise configuration utils.
 
 ## Installation
 
