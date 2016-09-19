@@ -1,26 +1,18 @@
 //#(c) 2014 Indexia, Inc.
 import Ember from "ember";
 import { module, test } from 'qunit';
+import StyleBindingsMixin from "ember-tree-utils/mixins/style-bindings";
 
-var View, view;
+let TextComponent = Ember.Component.extend(StyleBindingsMixin, {
+});
 
 module('Testing Style Bindings Mixin', {
-    setup: function() {
-        View = Ember.View.extend(Ember.Eu.StyleBindingsMixin, {
-        });
-    },
-
-    teardown: function() {
-        Ember.run(function() {
-            if (!view.isDestroyed) { view.destroy(); }
-        });
-    }
 });
 
 
 
 test('basic', function(assert) {
-    view = View.create({
+    let view = TextComponent.create({
         styleBindings: ['color', 'width', 'height'],
         color: 'blue',
         width: 400,

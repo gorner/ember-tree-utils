@@ -1,34 +1,28 @@
 //#(c) 2014 Indexia, Inc.
 import Ember from "ember";
 import { module, test } from 'qunit';
+import Config from "ember-tree-utils/config";
+import WithConfigMixin from "ember-tree-utils/mixins/with-config";
 
-var View, view;
+let TestComponent = Ember.Component.extend(WithConfigMixin, {
+});
 
 module('Testing WithConfigMixin', {
     beforeEach() {
-        Ember.Config = Ember.Eu.Config.create();
+        Ember.Config = Config.create();
         Ember.Config.addConfig('default', {
             baseClass: 'foo',
             tabs: {
                 inherited: "true"
             }
         });
-
-        View = Ember.View.extend(Ember.Eu.WithConfigMixin, {
-        });
     },
-
-    afterEach() {
-        Ember.run(function() {
-            if (view && !view.isDestroyed) { view.destroy(); }
-        });
-    }
 });
 
 test('default config', function(assert) {
     assert.ok(Ember.Config.getConfig('default'));
     assert.equal(Ember.Config.getConfig('default.baseClass'), 'foo');
-    view = View.create({
+    let view = TestComponent.create({
         classNameBindings: ['config.baseClass'],
     });
 

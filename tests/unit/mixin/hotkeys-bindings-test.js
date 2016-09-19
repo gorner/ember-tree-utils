@@ -1,18 +1,20 @@
 //(c) 2014 Indexia, Inc.
 import Ember from 'ember';
+import HotkeysBindingsMixin from "ember-tree-utils/mixins/hotkeys-bindings";
 import { module, test } from 'qunit';
 
-var View, view;
-var trigger = function(type, keyCode, someKey) {
+let trigger = function(type, keyCode, someKey) {
   var e = Ember.$.Event(type);
   e.which = keyCode;
 
   if (someKey) {
     e[someKey + "Key"] = true;
   }
-
   return e;
 };
+
+let TextComponent = Ember.Component.extend(HotkeysBindingsMixin, {
+});
 
 module('Testing Hotkeys Bindings Mixin', {
   beforeEach() {
@@ -22,18 +24,11 @@ module('Testing Hotkeys Bindings Mixin', {
       let App = Ember.Application.create();
       App.injectTestHelpers();
     });
-    View = Ember.Component.extend(Ember.Eu.HotkeysBindingsMixin, {});
   },
-
-  afterEach() {
-    Ember.run(function() {
-      //if (!view.isDestroyed) { view.destroy(); }
-    });
-  }
 });
 
 test('basic', function(assert) {
-  let viewDef = View.extend({
+  let comp = TextComponent.extend({
     hotkeysBindings: ['ctrl-a'],
 
     actions: {
@@ -59,7 +54,7 @@ test('basic', function(assert) {
     }
   });
 
-  view = viewDef.create();
+  let view = comp.create();
 
   Ember.run(function() {
     view.append();
