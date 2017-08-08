@@ -1,18 +1,16 @@
 {
   "name": "ember-tree-utils",
   "description": "Application wise configuration utils, fork from indexiatech/ember-idx-utils",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "author": "albert_lee@hotmail.com",
   "repository": {
       "type": "git",
       "url": "https://github.com/systembugtj/ember-global-config"
   },
-  "version": "0.2.4",
   "keywords": [
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
