@@ -3,14 +3,8 @@
   "version": "0.2.4",
   "description": "A set of utilities for Ember.js",
   "homepage": "http://www.github.com/systembugtj/ember-tree-utils",
-  "authors": [
-    "Indexia Technologies, ltd.",
-    "albert_lee@hotmail.com"
-  ],
   "license": "MIT",
   "dependencies": {
-    "ember": "~2.7.0",
-    "ember-cli-shims": "0.1.1",
-    "ember-qunit-notifications": "0.1.0"
+
   }
 }

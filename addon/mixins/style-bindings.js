@@ -1,7 +1,7 @@
 import Em from 'ember';
 
 /**
- * Provides styleBindings property to bind style 
+ * Provides styleBindings property to bind style
  * properties based on object properties.
  *
  * @class StyleBindingsMixin
@@ -60,8 +60,9 @@ export default Em.Mixin.create({
    * @private
    */
   applyBindings: Em.on('init', function() {
-    var lookup, properties, styleBindingsstyleBindings, styleComputed, styles;
-    if (!(styleBindingsstyleBindings = this.styleBindings)) {
+    var lookup, properties, styleComputed, styles;
+
+    if (!this.styleBindings) {
       return;
     }
     lookup = {};
