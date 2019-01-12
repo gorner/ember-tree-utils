@@ -1,14 +1,15 @@
 //#(c) 2014 Indexia, Inc.
-import Ember from "ember";
+import Ember from "@ember/engine";
 import { module, test } from 'qunit';
-import Config from "ember-tree-utils/config";
 //import WithConfigMixin from "ember-tree-utils/mixins/with-config";
-
-
 
 module('Testing WithConfigMixin', {
     beforeEach() {
-        Ember.Config = Config.create();
+        Ember.Config = {
+          addConfig: () => {
+
+          }
+        } ;
         Ember.Config.addConfig('default', {
             baseClass: 'foo',
             tabs: {

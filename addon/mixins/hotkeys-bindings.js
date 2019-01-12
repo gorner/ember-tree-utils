@@ -1,12 +1,12 @@
-import Em from 'ember';
-
+import Mixin from '@ember/object/mixin';
+import { debug } from '@ember/debug';
 /**
- * A mixin to enhance an `Ember.View` with hotkey support.
- * 
+ * A mixin to enhance an `Component` with hotkey support.
+ *
  * To use, inherit this mixin in your view:
  *
  * ```javascript
- * MyView = Em.View.extend(HotkeysMixin, {
+ * MyComponent = Component.extend(HotkeysMixin, {
  *   hotkeysBindings: ['ctrl-a']
  *
  *   actions: {
@@ -20,7 +20,7 @@ import Em from 'ember';
  * @class HotkeysMixin
  * @public
  */
-export default Em.Mixin.create({
+export default Mixin.create({
   /**
    * Add `hotkeysBindings` property as a `concatenatedProperties`.
    * @property concatenatedProperties
@@ -48,9 +48,8 @@ export default Em.Mixin.create({
     122: "f11",
     123: "f12"
   },
-  keyPressHandler: function(e) {
-    var command;
-    command = "";
+  keyPressHandler(e) {
+    let command = "";
     if (e.ctrlKey) {
       command += "ctrl+";
     }
@@ -68,16 +67,16 @@ export default Em.Mixin.create({
     } else {
       command += String.fromCharCode(e.which).toLowerCase();
     }
-    Em.debug("hotkey command: " + command);
+    debug("hotkey command: " + command);
     return this.send(command);
   },
-  keyDown: function(e) {
+  keyDown(e) {
     return this.keyPressHandler(e);
   },
-  keyUp: function(e) {
+  keyUp(e) {
     return this.keyPressHandler(e);
   },
-  keyPress: function(e) {
+  keyPress(e) {
     return this.keyPressHandler(e);
   }
 });

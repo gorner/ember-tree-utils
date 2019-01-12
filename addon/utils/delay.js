@@ -1,9 +1,10 @@
-import Em from 'ember';
+import { Promise } from 'rsvp';
+import { later } from "@ember/runloop";
 
 var delay = function(ms) {
   ms = ms || 1500;
-  return new Em.RSVP.Promise(function(resolve) {
-    Em.run.later(this, resolve, ms);
+  return new Promise(function(resolve) {
+    later(this, resolve, ms);
   });
 };
 

@@ -1,5 +1,7 @@
-import Em from 'ember';
-
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { typeOf } from '@ember/utils';
 /**
  * Provides styleBindings property to bind style
  * properties based on object properties.
@@ -7,7 +9,7 @@ import Em from 'ember';
  * @class StyleBindingsMixin
  * @public
  */
-export default Em.Mixin.create({
+export default Mixin.create({
 
   /**
    * Add `styleBindings` property as a `concatenatedProperties`.
@@ -38,13 +40,13 @@ export default Em.Mixin.create({
    * value of the style property.
    * @private
    */
-  buildStyleString: function(styleName, property) {
+  buildStyleString(styleName, property) {
     var value;
     value = this.get(property);
     if (value === void 0) {
       return;
     }
-    if (Em.typeOf(value) === "number") {
+    if (typeOf(value) === "number") {
       value = value + this.get("unit");
     }
     return styleName + ":" + value + ";";
@@ -59,8 +61,8 @@ export default Em.Mixin.create({
    * @method applyBindings
    * @private
    */
-  applyBindings: Em.on('init', function() {
-    var lookup, properties, styleComputed, styles;
+  applyBindings: on('init', function() {
+    let lookup, properties, styleComputed, styles;
 
     if (!this.styleBindings) {
       return;
@@ -73,11 +75,11 @@ export default Em.Mixin.create({
       style = propArr[1];
       return lookup[style || property] = property;
     });
-    styles = Em.keys(lookup);
+    styles = Object.keys(lookup);
     properties = styles.map(function(style) {
       return lookup[style];
     });
-    styleComputed = Em.computed(function() {
+    styleComputed = computed(function() {
       var styleString, styleTokens;
       styleTokens = styles.map((function(_this) {
         return function(style) {
@@ -90,6 +92,6 @@ export default Em.Mixin.create({
       }
     });
     styleComputed.property.apply(styleComputed, properties);
-    return Em.defineProperty(this, "style", styleComputed);
+    return Object.defineProperty(this, "style", styleComputed);
   })
 });

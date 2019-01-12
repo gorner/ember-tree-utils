@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import Application from '@ember/application';
 //import HotkeysBindingsMixin from "ember-tree-utils/mixins/hotkeys-bindings";
 import { module, test } from 'qunit';
 /*
@@ -15,10 +16,10 @@ let trigger = function(type, keyCode, someKey) {
 
 module('Testing Hotkeys Bindings Mixin', {
   beforeEach() {
-    Ember.run(function() {
+    run(function() {
       //without initializing app events won't be fired when triggering events on views such as
       //keypress
-      let App = Ember.Application.create();
+      let App = Application.create();
       App.injectTestHelpers();
     });
   },

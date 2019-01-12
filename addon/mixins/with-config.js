@@ -1,16 +1,17 @@
-import Em from 'ember';
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
+import Ember from "@ember/engine";
 
-export default Em.Mixin.create({
-  configName: Em.computed(function() {
-    var config;
-    config = this.nearestWithProperty('configName');
+export default Mixin.create({
+  configName: computed(() => {
+    let config = this.nearestWithProperty('configName');
     if (config) {
       return config.get('configName');
     } else {
       return 'default';
     }
   }),
-  config: Em.computed('configName', function() {
-    return Em.Config.getConfig(this.get('configName'));
+  config: computed('configName', function() {
+    return Ember.Config.getConfig(this.get('configName'));
   })
 });
