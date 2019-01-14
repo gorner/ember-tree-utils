@@ -1,22 +1,23 @@
-import Em from 'ember';
+import EmberObject from '@ember/object';
+import Namespace from '@ember/application/namespace';
 
 /*
 Maintain a list of configuration within an Ember Namespace,
 */
-export default Em.Namespace.extend({
-  _configs: Em.Object.create(),
+export default Namespace.extend({
+  _configs: EmberObject.create(),
 
   getConfig(name) {
-    var config;
-    config = this._configs.get(name);
-    return config;
+    return this._configs.get(name);
   },
 
   addConfig(name, config) {
-    var defaultConfig, newConfig;
-    defaultConfig = this._configs.get('default');
-    newConfig = Em.Object.create(config);
-    newConfig = Em.$.extend(true, newConfig, defaultConfig);
+    let defaultConfig = this._configs.get('default');
+    let newConfig = EmberObject.create(config);
+
+    if (defaultConfig) {
+      Object.apply(newConfig, defaultConfig)
+    }
     return this._configs.set(name, newConfig);
   }
 });

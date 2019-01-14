@@ -4,7 +4,7 @@ import Ember from "@ember/engine";
 
 export default Mixin.create({
   configName: computed(() => {
-    let config = this.nearestWithProperty('configName');
+    let config = this;
     if (config) {
       return config.get('configName');
     } else {
