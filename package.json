@@ -1,7 +1,7 @@
 {
   "name": "ember-tree-utils",
-  "description": "Application wise configuration utils, fork from indexiatech/ember-idx-utils",
-  "version": "3.7.1",
+  "description": "Application wise configuration utils, forked from indexiatech/ember-idx-utils",
+  "version": "3.7.2",
   "keywords": [
     "ember-addon"
   ],
