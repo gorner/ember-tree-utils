@@ -3,20 +3,6 @@
 const getChannelURL = require('ember-source-channel-url');
 const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
-<<<<<<< HEAD
-module.exports = function() {
-  return Promise.all([
-    getChannelURL('release'),
-    getChannelURL('beta'),
-    getChannelURL('canary')
-  ]).then((urls) => {
-    return {
-      scenarios: [
-        {
-          name: 'ember-lts-2.18',
-          env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true })
-=======
 module.exports = async function () {
   return {
     useYarn: true,
@@ -26,7 +12,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~3.20.5',
->>>>>>> 97e5ff8 (v3.8.1...v3.28.3)
           },
         },
       },
